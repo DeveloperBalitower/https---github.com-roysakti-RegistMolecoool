@@ -1,0 +1,7 @@
+CREATE TABLE [{TABLE}] (
+  row_id int(11) NOT NULL AUTO_INCREMENT,
+  [{FIELD}]
+  PRIMARY KEY (`row_id`)[{IDX}]  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+[{VIEWLIST}]

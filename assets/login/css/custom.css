@@ -1,0 +1,128 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+.resp-tab-active {
+    border-bottom: 4px solid #f2a309 !important;    
+}
+
+.page_login input[type="submit"] {
+    background: #012051;
+    border-radius: 100px;
+    color: #fff !important;
+}
+
+.page_registration input[type="submit"] {
+    background: #012051;
+    width: 100%;
+    border-radius: 100px;
+    color: #fff !important;
+}
+
+.page_login input[type="submit"]:hover {
+    background: #012051;
+    border-radius: 100px;
+    color: #fff !important;
+}
+
+.page_registration input[type="submit"]:hover {
+    background: #012051;
+    width: 100%;
+    border-radius: 100px;
+    color: #fff !important;
+}
+
+.page_registration select {
+    padding: 0px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+}
+
+.page_login p , .page_registration  p{
+    color: #fde7bd;
+}
+
+select option {
+	color: #000 !important;
+}
+
+
+.cbtn {
+	display: block;
+	width:100%;
+    text-transform: uppercase;
+    background: #012051;
+    outline: none;
+    border: none;
+    cursor: pointer;
+	color: #FFF;
+	font-size:0.85em;
+	font-weight: 600;
+	padding: 0.7em 0;
+	letter-spacing: 1px;
+	text-align: center;
+    border-radius: 100px;
+}
+
+.logo_balifiber {
+    margin-top: -20px;
+}
+
+.page_login input[type="email"],.page_login input[type="password"],.page_registration select,.page_registration input[type="date"],.page_registration input[type="text"],.page_registration input[type="number"],.page_registration input[type="password"],.page_registration input[type="email"]{
+    border: none;
+    padding: 0px;
+}
+
+.page_login input[type="text"] {
+    background-image:url('../images/ic_password.png') !important;
+}
+
+.divider {
+    /*border-top:1px solid #777;*/
+    border-top:1px solid #777;
+    display: block;
+    height: 1px;
+    margin-bottom: 20px;
+}
+
+.divider-orange {
+    border-top:1px solid #d35815;
+    display: block;
+    height: 1px;
+    margin-bottom: 20px;
+}
+
+.forgot_password {
+    float: right; font-size: 12px; color:#d35815
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #777;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #777;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #777;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #777;
+}
+
+.bg {
+    /*background-image:url('../bg.png') !important;
+    background-position: center center !important;
+    background-repeat:  no-repeat !important;
+    background-attachment: fixed !important;
+    background-size:  cover !important;*/
+    background-color: #fafafa !important;
+}
+
+input {
+    color: #777 !important;
+}
+
+select {
+    color: #777 !important;
+}
