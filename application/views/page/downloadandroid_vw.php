@@ -36,7 +36,7 @@
 
 	<center>
 		<a href="<?=$linkloginonly?>?dst=<?=$linkorigesc?>&username=T-<?=$macesc?>" 
-			onclick="window.open('https://play.google.com/store/apps/details?id=com.microsoft.todos','_blank');window.open(this.href,'_self');">
+			onclick="window.open('https://play.google.com/store/apps/details?id=id.co.molecool&hl=en','_blank');window.open(this.href,'_self');">
 			<img src="<?= base_url("assets/login/images") ?>/playstore.png" style="width:150px;" class="logo_balifiber" />
 		</a>
 	</center>

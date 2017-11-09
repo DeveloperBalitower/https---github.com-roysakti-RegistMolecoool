@@ -39,7 +39,7 @@
 <body class="bg">
    
    <div class="main wrap">
-   		<center><img src="<?= base_url("assets") ?>/molecool.png" style="margin-top: -20px; width:200px;" class="logo_balifiber" /></center>
+   		<center><span style="font-size:20px; font-weight: bold">TESTING</span></center>
    		<div style="clear:both; height:10px"></div>
         <div id="login_page">
    			<div style="clear:both; height:20px"></div>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class Hspot extends CI_Controller {
 	function __construct() {
         parent::__construct();
         $this->load->model("radius_mdl");
@@ -9,7 +9,7 @@ class User extends CI_Controller {
 
 	public function index() {
 
-		redirect(base_url("user/donotuse"));
+		redirect(base_url("hspot/donotuse"));
 
 		$mac = $this->input->post('mac');
 		$ip = $this->input->post('ip');
@@ -60,7 +60,7 @@ class User extends CI_Controller {
 			'linkloginonly' => $linkloginonly,
 			'linkorigesc' => $linkorigesc,
 			'macesc' => $macesc,
-			'type' => "public",
+			'type' => "public hotspot",
 		);
 
 		$this->load->view('page/loginform_vw', $data);
@@ -70,7 +70,7 @@ class User extends CI_Controller {
 		$this->load->view('page/alertform_vw');		
 	}
 
-	public function home() {
+	public function login() {
 		$mac = $this->input->post('mac');
 		$ip = $this->input->post('ip');
 		$username = $this->input->post('username');
@@ -95,7 +95,7 @@ class User extends CI_Controller {
 			'linkloginonly' => $linkloginonly,
 			'linkorigesc' => $linkorigesc,
 			'macesc' => $macesc,
-			'type' => "home",
+			'type' => "public hotspot",
 		);
 
 		// if($this->isDevice()) {
@@ -109,9 +109,9 @@ class User extends CI_Controller {
 		// }
 
 		if($mac == "") {
-			redirect(base_url("user/donotuse"));
+			redirect(base_url("hspot/donotuse"));
 		} else {
-			$this->load->view('page/loginform_vw', $data);
+			$this->load->view('page/publicloginform_vw', $data);
 		}
 	}
 
@@ -239,27 +239,12 @@ class User extends CI_Controller {
 					'creationdate' => date("Y-m-d H:i:s"),  
 				); 
 				$this->radius_mdl->insert("userinfo", $input);
-
-				$history = array(
-					'email' => $user_email, 
-					'mac_address' => $mac_address,
-					'txt' => "Insert",
-					'created_date' => date("Y-m-d H:i:s")
-				);
-				$this->radius_mdl->insert("molecool_history", $history);
-
-				$data = array(
-					'status' => "1",
-					'msg' => "Success",
-				);
-				echo json_encode($data);
-			} else {
-				$data = array(
-					'status' => "1",
-					'msg' => "Successfully",
-				);
-				echo json_encode($data);
-			}			
+			}
+			$data = array(
+				'status' => "1",
+				'msg' => "Successfully",
+			);
+			echo json_encode($data);			
 		} else {			
 			$data = array(
 				'status' => "0",
@@ -274,27 +259,10 @@ class User extends CI_Controller {
 		$user_email = $this->input->post('user_email');	
 		$mac_address = $this->input->post('mac_address');
 
-		// $update = array('value' => '5'); 
-		// $this->radius_mdl->update("radcheck", $update, "attribute = 'Simultaneous-Use' and username = '".$user_email."'");
-
-		// $update = array('value' => '0'); 
-		// $this->radius_mdl->update("radcheck", $update, "username = '".$mac_address."'");
-
+		$update = array('value' => '0'); 
+		$this->radius_mdl->update("radcheck", $update, "attribute = 'Simultaneous-Use' and username = '".$user_email."'");
 		$this->radius_mdl->delete("radcheck", "username = '".$mac_address."'");
 		$this->radius_mdl->delete("userinfo", "username = '".$mac_address."'");
-
-		$history = array(
-			'email' => $user_email, 
-			'mac_address' => $mac_address,
-			'txt' => "Delete",
-			'created_date' => date("Y-m-d H:i:s")
-		);
-		$this->radius_mdl->insert("molecool_history", $history);
-
-		$this->load->helper("mikrotik");
-        MikrotikKillSession($mac_address);
-        MikrotikKillSession($user_email);
-
 		$data = array(
 			'status' => "1",
 			'msg' => "Successfully",
@@ -322,7 +290,6 @@ class User extends CI_Controller {
 				'msg' => "Current password does not match",
 			);			
 		}
-		echo json_encode($data);	
 	}
 
 	function sendDataToSalesServer(
@@ -485,55 +452,4 @@ class User extends CI_Controller {
 		echo $par1."<BR>";
 		echo urldecode($par2);
 	}
-
-	public function doInsertRadius() {
-		$username = $this->input->post('username');
-		$pswrd = $this->input->post('pswrd');
-
-		$qry = "select * from radcheck where username = '".$username."'";
-		$rs = $this->radius_mdl->getByQuery($qry);
-		if($rs == "") {
-	        $input = array(
-				'username' => $username,
-				'attribute' => 'Cleartext-Password',  
-				'op' => ':=',
-				'value' => $pswrd
-			);
-			$this->radius_mdl->insert("radcheck", $input);
-			
-			$input = array(
-				'username' => $username,
-				'attribute' => 'Simultaneous-Use',  
-				'op' => ':=',
-				'value' => '5'
-			); 
-			$this->radius_mdl->insert("radcheck", $input);
-						
-			$input = array(
-				'username' => $username,
-				'creationdate' => date("Y-m-d H:i:s"),  
-			); 
-			$this->radius_mdl->insert("userinfo", $input);
-
-			$data = array(
-				'status' => "1",
-				'msg' => "Your registration is successfully",
-			);
-			echo json_encode($data);
-		} else {
-			$data = array(
-				'status' => "0",
-				'msg' => "Your account already exists",
-			);
-			echo json_encode($data);
-		}
-	}
-
-	public function mikrotik_killsession() {
-        $this->load->helper("mikrotik");
-        $mac_address = "AC:0D:1B:D4:7E:6D";
-        MikrotikAddSession($mac_address);
-    }
-
-
 }

@@ -7,20 +7,14 @@ class sendemail {
     
     function __construct() {        
         $this->_ci = &get_instance();
-        $this->from = "intranet@balitower.co.id";
+        $this->from = "noreply@molecool.id";
         $this->folder = base_url()."assets/backend/email/";
     }
     
-    function registrationPersonal($data) {        
+    function forgotPassword($data) {        
         $replaced = array(
-            "[{NAMACUSTOMER}]" => $data['nama_customer'], 
-            "[{NOKTP}]" => $data['no_ktp'],
-            "[{ALAMAT}]" => $data['alamat'],
-            "[{SERVICE}]" => $data['service'],
-            "[{METHODPAYMENT}]" => $data['pembayaran']
+            "[{LINK_CONFIRM}]" => $data['link_confirm']
         );
-
-
         
         $arrContextOptions=array(
             "ssl"=>array(
@@ -30,9 +24,8 @@ class sendemail {
         ); 
 
         $to = $data['to'];
-        $subject = $data['subject'];
-        $attachment = $data['attachment'];
-        $templateemail = base_url()."assets/backend/email/email_registration.txt"; 	  
+        $subject = "Forgot Password - Molecool";
+        $templateemail = base_url()."assets/backend/email/email_forgotpassword.txt"; 	  
         $gettemplate = file_get_contents($templateemail, false, stream_context_create($arrContextOptions));
         $msg = strtr($gettemplate, $replaced);
 		
@@ -43,13 +36,9 @@ class sendemail {
         $this->_ci->email->message($msg);   
         $this->_ci->email->set_newline("\r\n");
         
-        if($attachment != "") {  
-            $this->_ci->email->attach($attachment);            
-        }
-        
         if($this->_ci->email->send()) {
-            echo $this->_ci->email->print_debugger();die;
-            return "send";
+            //echo $this->_ci->email->print_debugger();die;
+            return true;
         } else {
             return false;
         }

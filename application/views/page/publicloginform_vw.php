@@ -80,7 +80,7 @@
 								<label class="checkbox w3l"><input type="checkbox" name="checkbox" required="required"><i> </i>I accept the terms and conditions</label>
 						 </div>-->
 
-			        	<a href="<?= base_url("user/forgotPassword")?>" class="forgot_password">Forgot Password?</a>
+			        	<a href="<?= base_url("hspot/forgotPassword")?>" class="forgot_password">Forgot Password?</a>
 
 					  	<div style="clear:both; height:30px"></div>					  
 
@@ -495,7 +495,7 @@
 			$.ajax({
 	        type: 'post',
 	        async: true,
-	        url: '<?= base_url("user") ?>/checkONT',
+	        url: '<?= base_url("hspot") ?>/checkONT',
 	        crossDomain: true,
 	        data: {
 	          'ontid': ontno,
@@ -513,6 +513,28 @@
 	          swal('Failed!', msg, 'error');
 	          $('.sumbit').html('Create Account');   
 	          $(".sumbit").attr("disabled", false); 
+	        }
+	      });
+		}
+
+		function addonLogin() {
+			var user_email = $('#username').val();
+			var user_password = $('#password').val();
+			var mac_address = $('#usermac').val();
+			$.ajax({
+	        type: 'post',
+	        async: true,
+	        url: '<?= base_url("user") ?>/addonLogin',
+	        crossDomain: true,
+	        data: {
+	          'user_email': user_email,
+	          'user_password': user_password,
+	          'mac_address': mac_address,
+	        },
+	        success: function(ret) {
+	          var data = JSON.parse(ret); 
+	        },
+	        error: function(jq,status,message) {
 	        }
 	      });
 		}
@@ -572,7 +594,7 @@
 	      $.ajax({
 	        type: 'post',
 	        async: true,
-	        url: '<?= base_url("user") ?>/doRegistration',
+	        url: '<?= base_url("hspot") ?>/doRegistration',
 	        crossDomain: true,
 	        data: {
 	          'first_name': first_name, 
@@ -630,28 +652,6 @@
 	          .text('jQuery is everywhere.'),
 	      })
 	    }
-
-	    function addonLogin() {
-			var user_email = $('#username').val();
-			var user_password = $('#password').val();
-			var mac_address = $('#usermac').val();
-			$.ajax({
-	        type: 'post',
-	        async: true,
-	        url: '<?= base_url("user") ?>/addonLogin',
-	        crossDomain: true,
-	        data: {
-	          'user_email': user_email,
-	          'user_password': user_password,
-	          'mac_address': mac_address,
-	        },
-	        success: function(ret) {
-	          var data = JSON.parse(ret); 
-	        },
-	        error: function(jq,status,message) {
-	        }
-	      });
-		}
 	//-->
 	</script>
 </body>

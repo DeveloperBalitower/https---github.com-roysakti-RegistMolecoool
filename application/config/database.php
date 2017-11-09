@@ -19,8 +19,24 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
-//$db['radius']['hostname'] = '192.168.169.12';172.16.1.136
-$db['radius']['hostname'] = '172.16.1.136';
+$db['rss']['hostname'] = '172.16.0.35';
+$db['rss']['username'] = 'yusa.febriyan';
+$db['rss']['password'] = 'yusa.febriyan';
+$db['rss']['database'] = 'rss_molecool';
+$db['rss']['dbdriver'] = 'mysqli';
+$db['rss']['dbprefix'] = '';
+$db['rss']['pconnect'] = TRUE;
+$db['rss']['db_debug'] = TRUE;
+$db['rss']['cache_on'] = FALSE;
+$db['rss']['cachedir'] = '';
+$db['rss']['char_set'] = 'utf8';
+$db['rss']['dbcollat'] = 'utf8_general_ci';
+$db['rss']['swap_pre'] = '';
+$db['rss']['autoinit'] = TRUE;
+$db['rss']['stricton'] = FALSE;
+
+$db['radius']['hostname'] = '192.168.169.12';
+//$db['radius']['hostname'] = '172.16.1.136';
 $db['radius']['username'] = 'root';
 $db['radius']['password'] = 'radius_balitower_01';
 $db['radius']['database'] = 'radius';

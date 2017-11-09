@@ -20,7 +20,6 @@
   <script type="text/javascript" src="<?=base_url('assets/backend')?>/chart/exporting.js"></script>
   <script type="text/javascript" src="<?=base_url('assets/backend')?>/chart/highcharts-more.js"></script>
   <script type="text/javascript" src="<?=base_url('assets/backend')?>/chart/solid-gauge.js"></script>
-  <link rel="shortcut icon" href="<?= base_url("assets/backend") ?>/dist/img/icon-aksesprima.png"/>
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>

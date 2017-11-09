@@ -1,76 +1,27 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class Testing extends CI_Controller {
 	function __construct() {
         parent::__construct();
         $this->load->model("radius_mdl");
    	}
 
 	public function index() {
-
 		redirect(base_url("user/donotuse"));
-
-		$mac = $this->input->post('mac');
-		$ip = $this->input->post('ip');
-		$username = $this->input->post('username');
-		$linklogin = $this->input->post('link-login');
-		$linkorig = $this->input->post('link-orig');
-		$error = $this->input->post('error');
-		$chapid = $this->input->post('chap-id');
-		$chapchallenge = $this->input->post('chap-challenge');
-		$linkloginonly = $this->input->post('link-login-only');
-		$linkorigesc = $this->input->post('link-orig-esc');
-		$macesc = $this->input->post('mac-esc');
-
-		/*$mac = "";
-		$ip = "";
-		$username = "";
-		$linklogin = "";
-		$linkorig = "";
-		$error = "";
-		$chapid = "";
-		$chapchallenge = "";
-		$linkloginonly = "";
-		$linkorigesc = "";
-		$macesc = "";*
-
-		echo 'mac => '.$mac.'<BR>';
-		echo 'ip => '.$ip.'<BR>';
-		echo 'username => '.$username.'<BR>';
-		echo 'linklogin => '.$linklogin.'<BR>';
-		echo 'linkorig => '.$linkorig.'<BR>';
-		echo 'error => '.$error.'<BR>';
-		echo 'chapid => '.$chapid.'<BR>';
-		echo 'chapchallenge => '.$chapchallenge.'<BR>';
-		echo 'linkloginonly => '.$linkloginonly.'<BR>';
-		echo 'linkorigesc => '.$linkorigesc.'<BR>';
-		echo 'macesc => '.$macesc.'<BR>';
-		die();*/
-
-		$data = array(
-			'mac' => $mac,
-			'ip' => $ip,
-			'username' => $username,
-			'linklogin' => $linklogin,
-			'linkorig' => $linkorig,
-			'error' => $error,
-			'chapid' => $chapid,
-			'chapchallenge' => $chapchallenge,
-			'linkloginonly' => $linkloginonly,
-			'linkorigesc' => $linkorigesc,
-			'macesc' => $macesc,
-			'type' => "public",
-		);
-
-		$this->load->view('page/loginform_vw', $data);
 	}
 
 	public function donotuse() {
 		$this->load->view('page/alertform_vw');		
 	}
 
+	public function alert() {
+		$this->load->view('page/alertform_vw');		
+	}
+
 	public function home() {
+		//$this->load->view('page/alertpublicform_vw');
+
 		$mac = $this->input->post('mac');
 		$ip = $this->input->post('ip');
 		$username = $this->input->post('username');
@@ -98,25 +49,54 @@ class User extends CI_Controller {
 			'type' => "home",
 		);
 
-		// if($this->isDevice()) {
-		// 	if($this->getDeviceOS() == "iOS") {
-		// 		$this->load->view('page/downloadios_vw', $data);
-		// 	} else if($this->getDeviceOS() == "Android") {
-		// 		$this->load->view('page/downloadandroid_vw', $data);
-		// 	}
-		// } else {
-		// 	$this->load->view('page/loginform_vw', $data);
-		// }
-
-		if($mac == "") {
-			redirect(base_url("user/donotuse"));
+		if($this->isDevice()) {
+			if($this->getDeviceOS() == "iOS") {
+				$this->load->view('page/downloadios_vw', $data);
+			} else if($this->getDeviceOS() == "Android") {
+				$this->load->view('page/downloadandroid_vw', $data);
+			}
 		} else {
 			$this->load->view('page/loginform_vw', $data);
 		}
 	}
+	
+	public function publik() {
+		$mac = $this->input->post('mac');
+		$ip = $this->input->post('ip');
+		$username = $this->input->post('username');
+		$linklogin = $this->input->post('link-login');
+		$linkorig = $this->input->post('link-orig');
+		$error = $this->input->post('error');
+		$chapid = $this->input->post('chap-id');
+		$chapchallenge = $this->input->post('chap-challenge');
+		$linkloginonly = $this->input->post('link-login-only');
+		$linkorigesc = $this->input->post('link-orig-esc');
+		$macesc = $this->input->post('mac-esc');
 
-	public function index2() {
-		$this->load->view('page/loginform_vw');		
+		$data = array(
+			'mac' => $mac,
+			'ip' => $ip,
+			'username' => $username,
+			'linklogin' => $linklogin,
+			'linkorig' => $linkorig,
+			'error' => $error,
+			'chapid' => $chapid,
+			'chapchallenge' => $chapchallenge,
+			'linkloginonly' => $linkloginonly,
+			'linkorigesc' => $linkorigesc,
+			'macesc' => $macesc,
+			'type' => "home",
+		);
+
+		if($this->isDevice()) {
+			if($this->getDeviceOS() == "iOS") {
+				$this->load->view('page/downloadios_vw', $data);
+			} else if($this->getDeviceOS() == "Android") {
+				$this->load->view('page/downloadandroid_vw', $data);
+			}
+		} else {
+			$this->load->view('page/alertpublicform_vw', $data);
+		}
 	}
 
 	public function doRegistration() {
@@ -171,24 +151,17 @@ class User extends CI_Controller {
 			); 
 			$this->radius_mdl->insert("userinfo", $input);
 
-			// $input = array(
-			// 	'ont_id' => $ontid,
-			// 	'first_name' => $first_name,
-			// 	'middle_name' => $middle_name,
-			// 	'last_name' => $last_name,
-			// 	'gender' => $gender,
-			// 	'date_of_birth' => $birthofdate,
-			// 	'phone' => $userphone,
-			// 	'email' => $useremail,
-			// 	'pswrd' => $userpw,
-			// 	'mac_address' => $usermac,
-			// 	'register_at' => $usertype,
-			// 	'created_date' => date("Y-m-d H:i:s"),
-			// );
-			// insert("customerconnecttable", $input);
-
+			//Insert data to Customer Connect
 			$this->sendDataToSalesServer($ontid, $first_name, $middle_name, $last_name, $gender, $birthofdate, 
 			$userphone, $useremail, $userpw, $usermac, $usertype);
+
+			//Insert data to Apps Server Molecool
+			$fullname = $first_name." ".$middle_name." ".$last_name;
+			$this->sendDataToAppsServer(
+				$fullname, $useremail, $birthofdate, "", "", "", 
+				"", $userphone, $gender, "", "", 
+				0, $usermac, $userpw
+			);
 
 			$data = array(
 				'status' => "1",
@@ -239,15 +212,6 @@ class User extends CI_Controller {
 					'creationdate' => date("Y-m-d H:i:s"),  
 				); 
 				$this->radius_mdl->insert("userinfo", $input);
-
-				$history = array(
-					'email' => $user_email, 
-					'mac_address' => $mac_address,
-					'txt' => "Insert",
-					'created_date' => date("Y-m-d H:i:s")
-				);
-				$this->radius_mdl->insert("molecool_history", $history);
-
 				$data = array(
 					'status' => "1",
 					'msg' => "Success",
@@ -277,19 +241,8 @@ class User extends CI_Controller {
 		// $update = array('value' => '5'); 
 		// $this->radius_mdl->update("radcheck", $update, "attribute = 'Simultaneous-Use' and username = '".$user_email."'");
 
-		// $update = array('value' => '0'); 
-		// $this->radius_mdl->update("radcheck", $update, "username = '".$mac_address."'");
-
 		$this->radius_mdl->delete("radcheck", "username = '".$mac_address."'");
 		$this->radius_mdl->delete("userinfo", "username = '".$mac_address."'");
-
-		$history = array(
-			'email' => $user_email, 
-			'mac_address' => $mac_address,
-			'txt' => "Delete",
-			'created_date' => date("Y-m-d H:i:s")
-		);
-		$this->radius_mdl->insert("molecool_history", $history);
 
 		$this->load->helper("mikrotik");
         MikrotikKillSession($mac_address);
@@ -364,6 +317,49 @@ class User extends CI_Controller {
 		curl_close($ch);
 	}
 
+	function sendDataToAppsServer(
+			$fullname, $email, $birthdate, $address, $province_id, $city_id, 
+			$district_id, $phone_number, $gender, $facebook_id, $google_id, 
+			$residential, $mac_adress, $password
+		) {
+		$url = 'https://serve01.molecool.id/api/v1/signup';
+		$fields = array(
+			'fullname' => urlencode($fullname),
+			'email' => urlencode($email),
+			'birthdate' => urlencode($birthdate),
+			'address' => urlencode($address),
+			'province_id' => urlencode($province_id),
+			'city_id' => urlencode($city_id),
+			'district_id' => urlencode($district_id),
+			'phone_number' => urlencode($phone_number),
+			'gender' => urlencode($gender),
+			'facebook_id' => urlencode($facebook_id),
+			'google_id' => urlencode($google_id),
+			'residential' => urlencode($residential),
+			'mac_adress' => urlencode($mac_adress),
+			'password' => urlencode($password)
+		);
+
+		//url-ify the data for the POST
+		$fields_string = "";
+		foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+		rtrim($fields_string, '&');
+
+		//open connection
+		$ch = curl_init();
+
+		//set the url, number of POST vars, POST data
+		curl_setopt($ch,CURLOPT_URL, $url);
+		curl_setopt($ch,CURLOPT_POST, count($fields));
+		curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+
+		//execute post
+		$result = curl_exec($ch);
+
+		//close connection
+		curl_close($ch);
+	}
+
 	function checkONT() {
 		$ontid = $this->input->post("ontid");
 		//$rs = getByQuery("select ont_id from vw_ontlist where ont_id = '".$ontid."' and status_txt = 'In use'");
@@ -410,14 +406,6 @@ class User extends CI_Controller {
 			return "";
 		}
 	}
-
-	public function test() {
-		if($this->isDevice()) {
-			echo "device - ".$this->getDeviceOS();
-		} else {
-			echo "computer";
-		}
-	}
 	
 	public function forgotPassword() {
 		$this->load->view('page/forgotpasswordform_vw');
@@ -448,7 +436,7 @@ class User extends CI_Controller {
 	public function sendEmail($user_email, $new_password, $id) {
 		$enpassword = urlencode($new_password);
 		$par1 = md5(date("YmdHis")).$enpassword;
-		$link_confirm = base_url()."user/confirmPassword/".$par1."/".$id;
+		$link_confirm = base_url()."testing/confirmPassword/".$par1."/".$id;
 				
 		$data = array(
 			'link_confirm' => $link_confirm,
@@ -470,7 +458,7 @@ class User extends CI_Controller {
 			'status' => "1",
 			'msg' => "Successfully",
 		);
-		redirect(base_url()."user/resetsuccess");
+		redirect(base_url()."testing/resetsuccess");
 	}
 	
 	public function resetsuccess() {
@@ -529,11 +517,7 @@ class User extends CI_Controller {
 		}
 	}
 
-	public function mikrotik_killsession() {
-        $this->load->helper("mikrotik");
-        $mac_address = "AC:0D:1B:D4:7E:6D";
-        MikrotikAddSession($mac_address);
+	public function killSession() {
+        $this->load->helper("mikrotik");        
     }
-
-
 }

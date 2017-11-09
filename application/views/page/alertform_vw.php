@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url("assets/font-awesome") ?>/css/font-awesome.css" />
 	<script src="<?= base_url("assets/login") ?>/js/jquery-1.9.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?= base_url("assets/login") ?>/css/custom.css " />
-	<script>
+	<!--<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -24,30 +24,39 @@
 
 	  ga('create', 'UA-101039839-2', 'auto');
 	  ga('send', 'pageview');
-	</script>
+	</script>-->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105408751-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </head>
 <body class="bg">
+   
+   <div class="main wrap">
 
-	<div style="clear:both; height:150px"></div>
+   		<div style="clear:both; height:50px"></div>
 
-   	<center><img src="<?= base_url("assets") ?>/molecool.png" style="width:150px;" class="logo_balifiber" /></center>
+   		<center>
+   			<p style="font-size:25px">Maaf<BR> halaman ini hanya dapat diakses melalui jaringan Balifiber.</p>
+   		</center>
 
-	<div style="clear:both; height:50px"></div>   
+   		<div style="clear:both; height:60px"></div>
 
-	<center>
-		<a href="<?=$linkloginonly?>?dst=<?=$linkorigesc?>&username=T-<?=$macesc?>" 
-			onclick="window.open('https://itunes.apple.com/us/app/molecool/id1270643328?mt=8','_blank');window.open(this.href,'_self');">
-			<img src="<?= base_url("assets/login/images") ?>/appstore.png" style="width:150px;" class="logo_balifiber" />
-		</a>
-	</center>
+   		<center><img src="<?= base_url("assets") ?>/molecool.png" style="width:100px;" class="logo_balifiber" /></center>
+   		<div style="clear:both; height:10px"></div>
 
-	<script src="<?= base_url("assets/login") ?>/js/jquery-ui.js"></script>
-	<script src="<?= base_url("assets/login") ?>/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?= base_url("assets/login") ?>/js/bootstrap-datetimepicker.js"></script>
-	<script src="<?= base_url("assets/login") ?>/js/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript" src="<?= base_url("assets/userconnect") ?>/js/md5.js"></script>
-	<script type="text/javascript" src="<?= base_url("assets/sweetalert2") ?>/sweetalert2.js"></script>
-	<script type="text/javascript" src="<?= base_url("assets/sweetalert2") ?>/sweetalert2.min.js"></script>
+
+   		<center>
+   			<p>Info: care@balifiber.id</p>
+   		</center>
+
+    </div>
 </body>
 </html>
 
